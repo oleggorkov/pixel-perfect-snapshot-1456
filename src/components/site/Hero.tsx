@@ -11,7 +11,7 @@ function Counter({ to, suffix = "+" }: { to: number; suffix?: string }) {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
+      if (!e?.isIntersecting) return;
       io.disconnect();
       const start = performance.now();
       const dur = 1600;
