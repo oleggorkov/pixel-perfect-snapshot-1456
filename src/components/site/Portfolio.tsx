@@ -32,7 +32,7 @@ export function Portfolio() {
   const doc = active !== null ? DOCS[active] : null;
 
   return (
-    <section id="portfolio" className="mx-auto max-w-[1680px] px-5 py-24 md:px-10 lg:py-32">
+    <section id="portfolio" className="mx-auto max-w-[1680px] px-5 py-28 md:px-10 lg:py-36">
       <div className="flex items-end justify-between gap-6">
         <SectionTitle title="Примеры проектной документации" className="flex-1" />
         <div className="mb-10 hidden gap-3 md:mb-14 md:flex">
