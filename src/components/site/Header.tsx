@@ -42,7 +42,7 @@ export function Header() {
                 e.preventDefault();
                 go(n.id);
               }}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               {n.label}
             </a>
@@ -51,7 +51,7 @@ export function Header() {
         <div className="hidden items-center gap-6 lg:flex">
           <a href={PHONE_HREF} className="flex items-center gap-2 text-sm font-semibold hover:text-primary-glow">
             <Phone className="h-4 w-4 text-primary-glow" />
-            <span className="hidden xl:inline">{PHONE}</span>
+            <span className="hidden whitespace-nowrap xl:inline">{PHONE}</span>
           </a>
           <Button variant="hero" onClick={() => go("contact")}>
             Рассчитать стоимость
