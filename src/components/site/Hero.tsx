@@ -69,22 +69,22 @@ export function Hero() {
 
       <div className="relative mx-auto w-full max-w-[1680px] px-5 py-16 md:px-10">
         <div className="max-w-[760px] animate-in fade-in slide-in-from-bottom-6 duration-1000">
-          <div className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-glow">
-            <span className="h-px w-10 bg-primary-glow" />
+          <div className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            <span className="h-px w-10 bg-primary" />
             Профессиональная разработка строительной документации
           </div>
           <h1 className="font-display text-4xl font-semibold leading-[1.08] sm:text-5xl xl:text-[68px]">
-            Разрабатываем документацию <span className="text-gradient">для уверенного строительства</span>
+            Разрабатываем документацию <span className="text-primary">для уверенного строительства</span>
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            ППР, ТК, ППР с применением подъемных сооружений, ППРв и ПОС — для строительных объектов по всей России.
+            ППР, технологические карты, проекты организации строительства и другая инженерная документация для объектов по всей России.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Button variant="hero" size="xl" onClick={() => scrollToId("contact")}>
               Обсудить проект <ArrowRight />
             </Button>
             <Button variant="glow" size="xl" onClick={() => scrollToId("services")}>
-              Смотреть услуги <ArrowRight />
+              Наши услуги <ArrowRight />
             </Button>
           </div>
           <div className="mt-14 flex flex-wrap gap-y-6">
@@ -93,7 +93,7 @@ export function Hero() {
                 key={s.l}
                 className={i > 0 ? "border-l border-border pl-6 pr-6 sm:pl-10 sm:pr-10" : "pr-6 sm:pr-10"}
               >
-                <div className="font-display text-4xl font-semibold md:text-5xl">
+                <div className="font-display text-4xl font-semibold text-primary md:text-5xl">
                   <Counter to={s.n} />
                 </div>
                 <div className="mt-2 max-w-[130px] text-sm text-muted-foreground">{s.l}</div>

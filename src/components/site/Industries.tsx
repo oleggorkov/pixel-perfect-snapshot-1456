@@ -14,7 +14,7 @@ const ITEMS = [
 
 export function Industries() {
   return (
-    <section id="industries" className="mx-auto max-w-[1680px] px-5 py-24 md:px-10 lg:py-32">
+    <section id="industries" className="mx-auto max-w-[1680px] px-5 py-28 md:px-10 lg:py-36">
       <SectionTitle
         title="Работаем с объектами разного масштаба"
         subtitle="Разрабатываем документацию для различных направлений строительства и промышленности."
@@ -24,7 +24,7 @@ export function Industries() {
           <Reveal key={it.t} delay={i * 100}>
             <article className="group relative h-[380px] overflow-hidden rounded-lg border border-border transition-colors hover:border-primary-glow/70 2xl:h-[440px]">
               <img src={it.img} alt={it.t} loading="lazy" width={1024} height={768} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6">
                 <div className="flex items-end justify-between gap-4">
                   <h3 className="font-display text-xl font-semibold">{it.t}</h3>

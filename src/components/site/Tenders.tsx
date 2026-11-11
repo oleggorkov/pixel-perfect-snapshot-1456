@@ -13,7 +13,7 @@ export function Tenders() {
   return (
     <section id="tenders" className="relative overflow-hidden">
       <div className="mx-auto grid max-w-[1680px] items-stretch lg:grid-cols-[1fr_1.15fr]">
-        <div className="relative z-10 px-5 py-24 md:px-10 lg:py-32 lg:pr-16">
+        <div className="relative z-10 px-5 py-28 md:px-10 lg:py-36 lg:pr-16">
           <Reveal>
             <div className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-glow">
               <span className="h-px w-10 bg-primary-glow" /> Тендеры и госзаказ
@@ -32,7 +32,7 @@ export function Tenders() {
           </Reveal>
           <Reveal delay={150} className="mt-10 grid gap-4 sm:grid-cols-3">
             {DIRS.map((d) => (
-              <div key={d.t} className="border-l-2 border-primary/70 bg-card/40 p-4">
+              <div key={d.t} className="border-l-2 border-primary/70 bg-background-2 p-4">
                 <d.icon className="h-7 w-7 text-primary-glow" strokeWidth={1.4} />
                 <div className="mt-3 text-sm font-semibold leading-snug">{d.t}</div>
               </div>

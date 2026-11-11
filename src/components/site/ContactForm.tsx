@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -10,13 +10,24 @@ import { Blueprint, Reveal } from "./shared";
 const empty: FormValues = { name: "", phone: "", email: "", docs: [], comment: "" };
 
 const field =
-  "h-13 w-full rounded-md border bg-background/60 px-4 text-[15px] outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary-glow focus:bg-background";
+  "h-13 w-full rounded-md border bg-background px-4 text-[15px] outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary-glow focus:bg-background";
 
 export function ContactForm() {
   const [v, setV] = useState<FormValues>(empty);
   const [errors, setErrors] = useState<ReturnType<typeof validate>>({});
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const on = (e: Event) => {
+      const name = (e as CustomEvent<string>).detail;
+      setDone(false);
+      setV((p) => (p.docs.includes(name) ? p : { ...p, docs: [...p.docs, name] }));
+      setErrors((x) => ({ ...x, docs: undefined }));
+    };
+    window.addEventListener("as:select-service", on);
+    return () => window.removeEventListener("as:select-service", on);
+  }, []);
 
   const set = <K extends keyof FormValues>(k: K, val: FormValues[K]) => {
     setV((p) => ({ ...p, [k]: val }));
@@ -46,15 +57,14 @@ export function ContactForm() {
       <div className="relative mx-auto grid max-w-[1680px] gap-12 px-5 py-24 md:px-10 lg:grid-cols-[1fr_1.2fr] lg:py-32">
         <Reveal>
           <h2 className="font-display text-3xl font-semibold leading-tight md:text-[44px]">
-            Расскажите о проекте — <span className="text-gradient">подготовим предложение</span>
+            Есть задача по проекту? <span className="text-primary">Давайте обсудим</span>
           </h2>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Оставьте заявку, и наш специалист свяжется с вами, уточнит задачу и поможет определить необходимый состав
-            документации.
+            Расскажите о вашем объекте, и мы поможем определить необходимый состав документации, сроки разработки и стоимость работ.
           </p>
         </Reveal>
         <Reveal delay={120}>
-          <div className="rounded-lg border border-border bg-card/80 p-6 shadow-[var(--shadow-glow)] backdrop-blur-md md:p-10">
+          <div className="rounded-lg border border-border bg-card p-6 shadow-[var(--shadow-glow)] border-t-4 border-t-primary md:p-10">
             {done ? (
               <div className="flex flex-col items-center py-12 text-center">
                 <CheckCircle2 className="h-14 w-14 text-primary-glow" strokeWidth={1.4} />
@@ -83,7 +93,7 @@ export function ContactForm() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-3 text-sm text-muted-foreground">Какая документация нужна?</div>
+                  <div className="mb-3 text-sm text-muted-foreground">Выберите услугу (можно несколько)</div>
                   <div className="flex flex-wrap gap-2">
                     {DOC_TYPES.map((d) => {
                       const on = v.docs.includes(d);
@@ -94,7 +104,7 @@ export function ContactForm() {
                           aria-pressed={on}
                           onClick={() => set("docs", on ? v.docs.filter((x) => x !== d) : [...v.docs, d])}
                           className={cn(
-                            "rounded-md border px-4 py-2.5 text-sm font-semibold transition-all",
+                            "rounded-md border px-3.5 py-2 text-left text-[13px] font-medium transition-all",
                             on ? "border-primary bg-primary text-primary-foreground" : "border-input hover:border-primary-glow",
                           )}
                         >
