@@ -32,15 +32,14 @@ jobs:
 
       # 3. Собираем проект через Bun
       - name: Build
-        run: bun run build
-      - name: Debug - List files after build
+        run: bun run build # или npm run build
+
+      # 👇 Добавляем исправление для SPA (чтобы не было 404 при обновлении)
+      - name: Fix SPA routing and bypass Jekyll
         run: |
-          echo "=== Список файлов в корне ==="
-          ls -la
-          echo "=== Поиск index.html ==="
-          find . -name "index.html" -type f
-          echo "=== Список файлов в папке dist (если она есть) ==="
-          ls -la dist || echo "Папка dist не найдена"
+          cd ./.output/public
+          cp index.html 404.html
+          touch .nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -48,10 +47,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # ⚠️ ВАЖНО: Убедитесь, что здесь указан правильный путь к папке с index.html
-          # Для TanStack Start в режиме SPA это обычно './dist' или './dist/client'
-          path: './dist' 
-      
+          # ⚠️ ИЗМЕНЕНО: Указываем правильную папку, где лежит index.html
+          path: './.output/public' 
 
       - name: Deploy to GitHub Pages
         id: deployment
