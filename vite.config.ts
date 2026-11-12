@@ -18,6 +18,6 @@ export default defineConfig({
   },
   nitro: false,
   vite: {
-    base: 'pixel-perfect-snapshot-1456',
+    base: '/pixel-perfect-snapshot-1456/',
   },
 });
