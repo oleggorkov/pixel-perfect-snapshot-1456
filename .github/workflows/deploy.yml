@@ -33,6 +33,14 @@ jobs:
       # 3. Собираем проект через Bun
       - name: Build
         run: bun run build
+      - name: Debug - List files after build
+        run: |
+          echo "=== Список файлов в корне ==="
+          ls -la
+          echo "=== Поиск index.html ==="
+          find . -name "index.html" -type f
+          echo "=== Список файлов в папке dist (если она есть) ==="
+          ls -la dist || echo "Папка dist не найдена"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -43,6 +51,7 @@ jobs:
           # ⚠️ ВАЖНО: Убедитесь, что здесь указан правильный путь к папке с index.html
           # Для TanStack Start в режиме SPA это обычно './dist' или './dist/client'
           path: './dist' 
+      
 
       - name: Deploy to GitHub Pages
         id: deployment
