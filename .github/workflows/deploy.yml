@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # Если ваша ветка называется master, измените здесь
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -20,16 +20,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      # 1. Устанавливаем Bun вместо Node.js
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: '22'
+          bun-version: latest
 
+      # 2. Устанавливаем зависимости через Bun
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: bun install
 
+      # 3. Собираем проект через Bun
       - name: Build
-        run: npm run build
+        run: bun run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -37,8 +40,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # ⚠️ ОЧЕНЬ ВАЖНО: Проверьте этот путь после сборки! 
-          # Если в папке dist нет index.html, укажите другой путь (например, './dist/client' или '.output/public')
+          # ⚠️ ВАЖНО: Убедитесь, что здесь указан правильный путь к папке с index.html
+          # Для TanStack Start в режиме SPA это обычно './dist' или './dist/client'
           path: './dist' 
 
       - name: Deploy to GitHub Pages
